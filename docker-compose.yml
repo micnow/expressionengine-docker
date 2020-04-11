@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+        db:
+                image: mysql:5.7.29
+                command: --default-authentication-plugin=mysql_native_password
+                restart: always
+                container_name: mysql_db_ee
+                volumes:
+                        - db_data:/var/lib/mysql
+                environment:
+                        MYSQL_DATABASE: expressionengine
+                        MYSQL_USER: expressionengine
+                        MYSQL_PASSWORD: expressionengine
+                        MYSQL_ROOT_PASSWORD: expressionengine
+                        MYSQL_HOST: db
+                ports:
+                        - 3306:3306
+                networks:
+                        - jamf-net
+                expose:
+                        - 3306
+
+        adminer:
+                image: adminer:latest
+                container_name: adminer_ee
+                restart: always
+                ports:
+                        - 8181:8080
+                networks:
+                        - jamf-net
+                links:
+                        - db
+
+        expressionengine:
+                build: .
+                image: expressionengine:5.3
+                container_name: expressionengine-5.3
+                ports:
+                        - 8080:80
+                depends_on:
+                        - db
+                links:
+                        - db
+                networks:
+                        - jamf-net
+
+volumes:
+        db_data:
+
+networks:
+        jamf-net:
