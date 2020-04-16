@@ -35,8 +35,8 @@ After first time running docker containers, we need to set up ExpressionEngine s
     **Username:** `some_user`  
     **Password:** `some_password`  
 
-    I suggest also to check `Install default theme?` option to have some dummy data on a front-end and back-end page.   
-    Check checkbox `I agree to the license Terms and Conditions` and click **Install** button.  
+    New to ExpressionEngine? Install the default theme to get up and running faster with dummy front-end and back-end data. To do this, please check `Install default theme?` option.   
+    Check checkbox `I agree to the license Terms and Conditions` and click **Install** button. 
     
     After successfully installation, you should be able to see info-box
     
