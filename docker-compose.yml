@@ -39,7 +39,7 @@ services:
                 ports:
                         - 7215:80
                 volumes:
-                        - $PWD/expressionengine:/var/www/html
+                        - ./expressionengine:/var/www/html
                 depends_on:
                         - db
                 links:
