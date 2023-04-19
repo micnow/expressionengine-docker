@@ -2,7 +2,7 @@ version: "3"
 
 services:
         db:
-                image: mysql:5.7.29
+                image: mysql:8.0.33
                 command: --default-authentication-plugin=mysql_native_password
                 restart: always
                 container_name: mysql_db_ee
@@ -17,7 +17,7 @@ services:
                 ports:
                         - 3306:3306
                 networks:
-                        - jamf-net
+                        - ee-net
                 expose:
                         - 3306
 
@@ -28,25 +28,27 @@ services:
                 ports:
                         - 8181:8080
                 networks:
-                        - jamf-net
+                        - ee-net
                 links:
                         - db
 
         expressionengine:
                 build: .
-                image: expressionengine:5.3
-                container_name: expressionengine-5.3
+                image: expressionengine:7.2.15
+                container_name: expressionengine-7.2.15
                 ports:
-                        - 8080:80
+                        - 7215:80
+                volumes:
+                        - ./expressionengine:/var/www/html
                 depends_on:
                         - db
                 links:
                         - db
                 networks:
-                        - jamf-net
+                        - ee-net
 
 volumes:
         db_data:
 
 networks:
-        jamf-net:
+        ee-net:
