@@ -1,5 +1,3 @@
-version: "3"
-
 services:
         db:
                 image: mysql:8.0.33
@@ -29,8 +27,6 @@ services:
                         - 8181:8080
                 networks:
                         - ee-net
-                links:
-                        - db
 
         expressionengine:
                 build: .
@@ -42,8 +38,7 @@ services:
                         - ./expressionengine:/var/www/html
                 depends_on:
                         - db
-                links:
-                        - db
+                        
                 networks:
                         - ee-net
 
